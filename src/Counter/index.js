@@ -7,6 +7,7 @@ import DecreaseButton from './containers/DecreaseButton';
 import CounterNumber from './containers/Counter';
 import reducer from './state-management/reducers';
 import Submit from './components/Submit';
+
 const store = createStore(reducer);
 const Counter = styled.div`
   min-width: 500px;
