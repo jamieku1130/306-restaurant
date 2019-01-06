@@ -7,6 +7,9 @@ import DecreaseButton from './containers/DecreaseButton';
 import CounterNumber from './containers/Counter';
 import reducer from './state-management/reducers';
 import Submit from './components/Submit';
+import ChildIncreaseButton from './childContainers/IncreaseButton';
+import ChildDecreaseButton from './childContainers/DecreaseButton';
+import ChildCounterNumber from './childContainers/Counter';
 
 const store = createStore(reducer);
 const Counter = styled.div`
@@ -81,11 +84,11 @@ const Component = () => {
         <Card>
           <Left>小孩人數：</Left>
           <Center>
-            <CounterNumber />
+            <ChildCounterNumber />
           </Center>
           <Right>
-            <IncreaseButton>+</IncreaseButton>
-            <DecreaseButton>-</DecreaseButton>
+            <ChildIncreaseButton>+</ChildIncreaseButton>
+            <ChildDecreaseButton>-</ChildDecreaseButton>
           </Right>
         </Card>
         <Submit>結帳</Submit>

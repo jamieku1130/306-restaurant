@@ -5,6 +5,6 @@ const Component = ({ counter }) => {
   return <div>{counter}</div>;
 };
 
-const mapStateToProps = state => ({ counter: state.counterA });
+const mapStateToProps = state => ({ counter: state.counterB });
 
 export default connect(mapStateToProps)(Component);

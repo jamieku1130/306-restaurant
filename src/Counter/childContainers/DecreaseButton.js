@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Button from '../components/Button';
-import { increaseCount } from '../state-management/actionCreators';
+import { decreaseCount } from '../state-management/actionCreators';
 
 const mapDispatchToProps = dispatch => ({
-  onClick: () => dispatch(increaseCount('A'))
+  onClick: () => dispatch(decreaseCount('B'))
 });
 
 export default connect(

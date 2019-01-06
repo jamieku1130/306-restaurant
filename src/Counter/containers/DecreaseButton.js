@@ -3,7 +3,7 @@ import Button from '../components/Button';
 import { decreaseCount } from '../state-management/actionCreators';
 
 const mapDispatchToProps = dispatch => ({
-  onClick: () => dispatch(decreaseCount())
+  onClick: () => dispatch(decreaseCount('A'))
 });
 
 export default connect(
