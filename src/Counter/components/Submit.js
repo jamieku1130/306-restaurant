@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-const Component = styled.a`
+import React from 'react';
+import { connect } from 'react-redux';
+
+const Button = styled.a`
   /* This renders the buttons above... Edit me! */
   display: inline-block;
   border-radius: 3px;
@@ -19,4 +22,15 @@ const Component = styled.a`
   }
 `;
 
-export default Component;
+const Submit = ({ onClick, counterA, counterB, children }) => {
+  return (
+    <Button onClick={() => onClick(counterA, counterB)}>{children}</Button>
+  );
+};
+
+const mapStateToProps = state => ({
+  counterA: state.counterA,
+  counterB: state.counterB
+});
+
+export default connect(mapStateToProps)(Submit);

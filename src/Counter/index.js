@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import Submit from './components/Submit';
 import ChildIncreaseButton from './childContainers/IncreaseButton';
 import ChildDecreaseButton from './childContainers/DecreaseButton';
 import ChildCounterNumber from './childContainers/Counter';
+import calc from './calc';
 
 const store = createStore(reducer);
 const Counter = styled.div`
@@ -67,34 +68,73 @@ const Right = styled.div`
   align-items: center;
 `;
 
-const Component = () => {
-  return (
-    <Provider store={store}>
-      <Counter>
-        <Card>
-          <Left>大人人數：</Left>
-          <Center>
-            <CounterNumber />
-          </Center>
-          <Right>
-            <IncreaseButton>+</IncreaseButton>
-            <DecreaseButton>-</DecreaseButton>
-          </Right>
-        </Card>
-        <Card>
-          <Left>小孩人數：</Left>
-          <Center>
-            <ChildCounterNumber />
-          </Center>
-          <Right>
-            <ChildIncreaseButton>+</ChildIncreaseButton>
-            <ChildDecreaseButton>-</ChildDecreaseButton>
-          </Right>
-        </Card>
-        <Submit>結帳</Submit>
-      </Counter>
-    </Provider>
-  );
-};
+class CounterApp extends Component {
+  state = {
+    adult: 0,
+    child: 0,
+    adultNoFee: 0,
+    childNoFee: 0,
+    adultFee: 0,
+    childFee: 0,
+    total: 0
+  };
 
-export default Component;
+  onSubmitHandler = (counterA, counterB) => {
+    const {
+      adult,
+      child,
+      adultNoFee,
+      childNoFee,
+      adultFee,
+      childFee,
+      total
+    } = calc(counterA, counterB);
+    this.setState({
+      adult,
+      child,
+      adultNoFee,
+      childNoFee,
+      adultFee,
+      childFee,
+      total
+    });
+  };
+  render() {
+    return (
+      <Provider store={store}>
+        <Counter>
+          <Card>
+            <Left>大人人數：</Left>
+            <Center>
+              <CounterNumber />
+            </Center>
+            <Right>
+              <IncreaseButton>+</IncreaseButton>
+              <DecreaseButton>-</DecreaseButton>
+            </Right>
+          </Card>
+          <Card>
+            <Left>小孩人數：</Left>
+            <Center>
+              <ChildCounterNumber />
+            </Center>
+            <Right>
+              <ChildIncreaseButton>+</ChildIncreaseButton>
+              <ChildDecreaseButton>-</ChildDecreaseButton>
+            </Right>
+          </Card>
+          <Submit onClick={this.onSubmitHandler}>結帳</Submit>
+        </Counter>
+        <p>{`大人數量 = ${this.state.adult}`}</p>
+        <p>{`小孩數量 = ${this.state.child}`}</p>
+        <p>{`大人免費數量 = ${this.state.adultNoFee}`}</p>
+        <p>{`小孩免費數量 = ${this.state.childNoFee}`}</p>
+        <p>{`大人收費金額 = ${this.state.adultFee}`}</p>
+        <p>{`小孩收費金額 = ${this.state.childFee}`}</p>
+        <p>{`結帳金額 = ${this.state.total}`}</p>
+      </Provider>
+    );
+  }
+}
+
+export default CounterApp;
